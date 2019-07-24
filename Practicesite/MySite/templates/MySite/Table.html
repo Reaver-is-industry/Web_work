@@ -1,0 +1,45 @@
+{% extends "MySite/wrapper.html" %}
+
+{% block content %}
+
+<ul class="pagination justify-content-center">
+
+    {% if values.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ values.previous_page_number }}">←</a></li>
+    {% endif %}
+
+    {% for num in values.paginator.page_range %}
+        {% if num == values.number %}
+            <span class="page-link"><b>{{ num }}</b></span>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}"> {{ num }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if values.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ values.next_page_number }}">→</a></li>
+    {% endif %}
+
+</ul>
+
+<table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th>IP Destination</th>
+      <th>TCP Port</th>
+      <th>Login</th>
+      <th>Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for val in values %}
+      <tr>
+        <td>{{val.0}}</td>
+        <td>{{val.1}}</td>
+        <td>{{val.2}}</td>
+        <td>{{val.3}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

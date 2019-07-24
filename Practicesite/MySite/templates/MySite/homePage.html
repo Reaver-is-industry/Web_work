@@ -1,0 +1,25 @@
+{% extends "MySite/wrapper.html" %}
+
+{% block content %}
+<p>Пожалуйста, введите путь к базе данных</p>
+{% if form.errors %}
+        <p style="color: red;">Пожалуйста, исправьте ошибки.</p>
+    {% endif %}
+
+    <form action="" method="post">
+        {% for field in form %}
+            <p>
+                <label>{{ field.label }}</label>
+
+                {{ field }}
+
+                {{ field.errors }}
+            </p>
+        {% endfor %}
+        <input type="submit" value="Подтвердить">
+         {% csrf_token %}
+    </form>
+
+{% include "MySite/includes/SomeHtml.html" %}
+
+{% endblock %}

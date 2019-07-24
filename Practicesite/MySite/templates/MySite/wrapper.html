@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-compatible" content="ie=edge">
+    <title>Заголовок страницы</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Herzlich Willkommen</h1>
+        <p>
+          <a href="/" class="btn btn-success btn-lg">Die Haupseite</a>
+          <a href="/table" class="btn btn-info btn-lg">Die Tabelle</a>
+        </p>
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
