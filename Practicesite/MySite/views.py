@@ -12,12 +12,9 @@ def index(request):
         # Если форма прошла валидацию
         if form.is_valid():
             cd = form.cleaned_data
-
             DBPath = ('Name=%s' % (cd['name']))
+            # добавление cookie
             request.session['name'] = cd['name']
-            file = open('config.txt', 'w')
-            file.write(DBPath)
-            file.close()
     else:
         form = ContactForm()
     return render(request, 'MySite/homePage.html', {'form': form})
@@ -52,11 +49,7 @@ class DataBaseWork:
 def DBread(request):
     DB = DataBaseWork()
     Path = ''
-    # file = open('config.txt')
-    # lines = file.readlines()
-    # for line in lines:
-    #     if line.__contains__('Name'):
-    #         Path = line.split('=')[1].replace('\n', '')
+    # использование cookie
     Path = request.session.get('name')
     try:
         tablelist = DB.data_base_reading(Path)
@@ -71,5 +64,4 @@ def DBread(request):
         tablelist = current_page.page(1)
     except EmptyPage:
         tablelist = current_page.page(num_pages)
-    #return render(request, 'MySite/Table.html', {'values': [['ololo', 'heh', 'lol', 'kek'], ['ololo', 'heh', 'lol', 'kek']]})
     return render(request, 'MySite/Table.html', {'values': tablelist})
